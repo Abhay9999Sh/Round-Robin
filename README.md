@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎟️ Round-Robin Coupon System
 
-## Getting Started
+## 🚀 Overview
+The **Round-Robin Coupon System** is a Next.js web application that distributes coupons fairly while implementing abuse prevention strategies. Users can claim coupons without logging in, and the system ensures fair distribution using **IP tracking and cookie-based restrictions**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Features
+- ✅ **Fair Coupon Distribution** – Coupons are assigned sequentially to ensure even allocation.
+- ✅ **Guest Access** – No login or account creation required.
+- ✅ **Abuse Prevention** – Implements **IP tracking** and **cookie-based** restrictions.
+- ✅ **User Feedback** – Displays messages for successful claims and cooldown periods.
+- ✅ **Live Deployment** – Easily deployable for public access.
+
+---
+
+## 🛠️ Tech Stack
+- **Next.js (Latest)** – React framework with App Router.
+- **React (Latest)** – UI library for frontend components.
+- **MongoDB (Latest)** – Stores coupons and user claims.
+- **Tailwind CSS** – Utility-first CSS framework for styling.
+- **shadcn/ui** – Pre-built UI components.
+- **Lucide React** – Icon library.
+
+---
+
+## ⚙️ Setup Instructions
+
+### **1️⃣ Clone the Repository**
+```sh
+git clone https://github.com/Abhay9999Sh/Round-Robin.git
+cd round-robin-coupon-system
+
+```
+### **2 Install Dependencies**
+```sh
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **3 Configure Environment Variables**
+- Create a .env.local file in the root directory:
+```sh
+MONGODB_URI=your_mongodb_connection_string
+```
+### **4 Start the Development Server**
+```sh
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **App will be available at http://localhost:3000.**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔗 Routes
 
-## Learn More
+### **1️⃣ Seed the Database**
+Before using the application, seed the database with initial coupons.
 
-To learn more about Next.js, take a look at the following resources:
+- **Local:** `http://localhost:3000/api/seed`
+- **Production:** `https://your-vercel-domain.vercel.app/api/seed`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This will generate **50 sample coupons** in your MongoDB database.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **2️⃣ Main Application (Claim Coupons)**
+- **Local:** `http://localhost:3000`
+- **Production:** `https://your-vercel-domain.vercel.app`
 
-## Deploy on Vercel
+### **3️⃣ Admin Dashboard (Manage Coupons)**
+- **Local:** `http://localhost:3000/admin`
+- **Production:** `https://your-vercel-domain.vercel.app/admin`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔐 Abuse Prevention Strategies
+
+The application implements multiple layers of protection against abuse:
+
+- **IP Tracking** – Each coupon claim is associated with the user's IP address. The system prevents the same IP from claiming multiple coupons within the **one-hour cooldown period**.
+- **Cookie Tracking** – A unique user ID is stored in a **cookie** and used to track claims, preventing users from claiming multiple coupons by clearing their browser cache.
+- **Cooldown Timers** – Users must wait **one hour** between coupon claims. A countdown timer is displayed to indicate when they can claim again.
+
+---
+
+## 🎯 How It Works
+
+### **Round-Robin Distribution**
+Coupons are distributed **sequentially** to ensure fairness:
+
+1. When a user requests a coupon, the system finds the **first available (unclaimed) coupon** in the database.
+2. The coupon is **marked as claimed** and linked to the user's session.
+3. This guarantees **equal distribution** of coupons across all users.
+
+### **Database Structure**
+The system uses two main MongoDB collections:
+
+- **`coupons`** – Stores all available coupons with their **claim status**.
+- **`claims`** – Tracks **user claims with timestamps** to enforce cooldown restrictions.
+
+---
+
+## ⚙️ Customization Options
+
+You can modify the system to better suit your needs:
+
+- **Change the cooldown period** – Update the `CLAIM_COOLDOWN` constant in `app/actions.ts` (default: **3600 seconds/1 hour**).
+- **Add more coupons** – Use the **admin interface** (`/admin`) to manually add coupons.
+- **Modify the UI** – Edit the **Tailwind CSS** styles in components for a custom look.
+
+---
+
+## 🔒 Security Considerations
+
+For a production environment, consider implementing:
+
+- **Admin Authentication** – Secure the admin area using authentication middleware.
+- **Rate Limiting** – Prevent brute-force attempts by adding rate-limiting mechanisms.
+- **Enhanced User Tracking** – Consider a **stronger tracking mechanism** for high-security applications.
+
+## 💡 Final Thoughts
+
+The **Round-Robin Coupon System** is designed to distribute coupons fairly while preventing abuse. With **IP tracking, cookie-based restrictions, and cooldown timers**, users can claim coupons securely and efficiently.  
+
+Feel free to customize and extend the system as needed. Contributions, feedback, and suggestions are always welcome! 🚀  
+
+For any queries, reach out at **[abhay987123Sh@gmail.com](mailto:abhay987123Sh@gmail.com)**.  
+Happy coding! 🎉
