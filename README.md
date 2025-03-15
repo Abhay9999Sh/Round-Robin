@@ -55,17 +55,17 @@ npm run dev
 Before using the application, seed the database with initial coupons.
 
 - **Local:** `http://localhost:3000/api/seed`
-- **Production:** `https://your-vercel-domain.vercel.app/api/seed`
+- **Production:** `https://round-robin-nine.vercel.app/api/seed`
 
 This will generate **50 sample coupons** in your MongoDB database.
 
 ### **2️⃣ Main Application (Claim Coupons)**
 - **Local:** `http://localhost:3000`
-- **Production:** `https://your-vercel-domain.vercel.app`
+- **Production:** `https://round-robin-nine.vercel.app/`
 
 ### **3️⃣ Admin Dashboard (Manage Coupons)**
 - **Local:** `http://localhost:3000/admin`
-- **Production:** `https://your-vercel-domain.vercel.app/admin`
+- **Production:** `https://round-robin-nine.vercel.app/admin`
 
 ---
 
